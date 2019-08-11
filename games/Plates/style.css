@@ -8,11 +8,16 @@ body {
     font-size: 16em;
     font-family: sans-serif;
 }
+.win-body {
+    background: #2d6c95;
+}
+
+/*******************************************/
 
 .luckgame-wrapper {
     width: 80%;
-    height: 500px;
-    background: #314e69;
+    height: 600px;
+    background: #ffffff;
     margin: 0 auto;
 }
 .luckgame-table {
@@ -21,28 +26,62 @@ body {
     
 }
 
+/*******************************************/
+
 .a-tile {
     width: 100%;
     height: 100%;
     font-size: 0;
-    background: #66a4df;
-    transition: 0.33s ease-out background;
+    transition: 0.44s ease-out all;
+    background-image: url(https://image.flaticon.com/icons/svg/2044/2044822.svg) !important;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .a-tile:hover {
-    background: #8ec1f1;
-    transition: 0.11s ease-in background;
+    opacity: 0.9;
+    transition: 0.22s ease-in all;
 }
+
+/*******************************************/
+
+.a-tile1 {
+    background-color: #66a4df;
+}
+
+.a-tile2 {
+    background-color: #df6666;
+}
+
+.a-tile3 {
+    background-color: #dfcd66;
+}
+
+.a-tile4 {
+    background-color: #df66c5;
+}
+
+.a-tile5 {
+    background-color: #8666df;
+}
+
+/*******************************************/
+
 
 .loser {
-    background: #db4b5f;
+    background-color: #db4b5f;
 }
 .loser:hover {
-    background: #e66375;
+    background-color: #e66375;
 }
 
+/*******************************************/
+
 .winner {
-    background: #86c43f;
+    background-color: #86c43f;
 }
 .winner:hover {
-    background: #9cd45c;
+    background-color: #9cd45c;
 }
+
+/*******************************************/
