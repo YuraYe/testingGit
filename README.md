@@ -1,9 +1,9 @@
 # **test git repository**
 
 > Project with testing codes ^^
-> This file contains our all not very useful projects
-> Entry point: index.html
-> Suddenly?))
+>> This file contains our all not very useful projects
+>>> Entry point: index.html
+>>>> Suddenly?))
 
 ---------------------------------------
 
@@ -19,6 +19,6 @@
 
 - find an interesting and profitable job
 - finish all started projects
-- learn: C#, JS (html, css, scss), PHP, Ruby, Python
+- learn: C# (Unity), JS (html, css, scss), PHP, Ruby, Python
 
 ---------------------------------------

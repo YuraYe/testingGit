@@ -1,5 +1,5 @@
 let tiles
-let losers
+var losers = []
 let LOSE = false
 let WINN = 0
 
@@ -49,7 +49,8 @@ function OnReload (col = 2, row = 1, lose = 1) {
     // Запуск функций и присваивание значений
     Draw(col, row)
     tiles = $('.luckgame-table .a-tile')
-    losers = SetLosers(lose, tiles)
+    SetLosers(lose, tiles)
+    console.log(losers)
 
     // Событие нажатия на любую из плиток
     $(tiles).on('click', function () {
@@ -77,8 +78,6 @@ function Draw (col = 2, row = 1) {
 
 // Определяет, какие из плиток будут проигрышными
 function SetLosers (count = 1, tiles) {
-    losers = []
-
     for (let i = 0; i < tiles.length; i++) {
         losers[i] = 0
     }
@@ -95,8 +94,6 @@ function SetLosers (count = 1, tiles) {
         if (count <= 0) // Выход из цикла
             break
     }
-
-    return losers
 }
 
 // Генерирует рандомное целое число от min до max. Самый лучший вариант =)
