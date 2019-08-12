@@ -12,6 +12,30 @@ let step = 0
 let counter = 1
 let color   = 1
 
+$(function () {
+    OnReload()
+})
+
+
+function OnReload (col = 2, row = 1, lose = 0) {
+
+    deleteTable()
+    tiles = []
+    losers = []
+
+    $('body').removeClass('win-body') // Очистка фона :)
+
+    // Запуск функций и присваивание значений
+    Draw(col, row)
+    tiles = $('.luckgame-table .a-tile')
+    SetLosers(lose + 1, tiles)
+    step++
+
+    // Событие нажатия на любую из плиток
+    $(tiles).on('click', function () {
+        TileOnClick(this)
+    })
+}
 
 function TileOnClick (obj) {
     if (!LOSE) {
@@ -51,13 +75,34 @@ function TileOnClick (obj) {
                 }, 500)
 
             }
-
         }
     }
-
 }
 
 
+
+// Генерируем таблицу 
+function Draw (col = 2, row = 1) {
+    let id = 0;
+    color = rand(1, 5)
+
+    // тег-обертка таблицы
+    $('.luckgame-wrapper').append('<table id="luckgame-table" class="luckgame-table"></table>')
+
+    for (let r = 0; r < row; r++) { // строки
+        $('.luckgame-table').append('<tr></tr>')
+
+        for (let c = 0; c < col; c++) { // колонки
+            $('.luckgame-table>tr').last().append(`<th><div class="a-tile a-tile${color}">${id}</div></th>`)
+            id++
+        }
+    }
+    
+    $('#luckgame-table').height($('#luckgame-table').width())
+
+    $('#game-infopanel p').remove()
+    $('#game-infopanel').append(`<p>LEVEL:  ${String(counter++)}</p>`)
+}
 
 // Определяет, какие из плиток будут проигрышными
 function SetLosers (count = 1, tiles) {

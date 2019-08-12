@@ -29,45 +29,50 @@ body {
 .luckgame-table {
     width: 100%;
     height: 100%;
-    
 }
 
 /*******************************************/
 
-.a-tile {
+.b-tile {
     width: 100%;
     height: 100%;
     font-size: 0;
     transition: 0.44s ease-out all;
-    background-image: url(https://image.flaticon.com/icons/svg/2044/2044822.svg) !important;
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.a-tile:hover {
+.b-tile:hover {
     opacity: 0.9;
     transition: 0.22s ease-in all;
 }
 
+.flag {
+    background-image: url(https://image.flaticon.com/icons/svg/148/148878.svg) !important;
+}
+.question {
+    background-image: url(https://image.flaticon.com/icons/svg/148/148878.svg) !important;
+}
+
 /*******************************************/
 
-.a-tile1 {
+.b-tile1 {
     background-color: #66a4df;
 }
 
-.a-tile2 {
+.b-tile2 {
     background-color: #df6666;
 }
 
-.a-tile3 {
+.b-tile3 {
     background-color: #dfcd66;
 }
 
-.a-tile4 {
+.b-tile4 {
     background-color: #df66c5;
 }
 
-.a-tile5 {
+.b-tile5 {
     background-color: #8666df;
 }
 
