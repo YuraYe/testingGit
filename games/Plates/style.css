@@ -21,15 +21,15 @@ body {
 /*******************************************/
 
 .luckgame-wrapper {
-    width: 80%;
-    height: 600px;
+    width: 70%;
+    height: 400px;
     background: #ffffff;
     margin: 0 auto;
 }
 .luckgame-table {
     width: 100%;
     height: 100%;
-    
+
 }
 
 /*******************************************/
@@ -91,3 +91,20 @@ body {
 }
 
 /*******************************************/
+
+
+
+.bt {
+    width: 150px;
+    height: 50px;
+    color: #291a2d;
+    font-size: 32px;
+    font-weight: bold;
+    background-color: #dde4ea;
+    border-style: none;
+}
+
+
+.bt-half-after {
+    background-color: #5a4755;
+}

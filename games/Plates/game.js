@@ -39,7 +39,7 @@ function TileOnClick (obj) {
                     LOSE = false
                     WINN = 0
                     
-                    if (rows % 4 == 0) 
+                    if (rows % 8 == 0) 
                         cols += 1
                     else 
                         rows += 1
@@ -71,7 +71,8 @@ function SetLosers (count = 1, tiles) {
         // Проверка на повторы. 1 === "проиграть"
         if (losers[po] != 1) {
             losers[po] = 1;
-            count--
+            $(tiles[po]).addClass('bt-half-before');
+            count--;
         }
 
         if (count <= 0) // Выход из цикла
