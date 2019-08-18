@@ -93,7 +93,7 @@ input[type=checkbox]+label:before {
 }
 
 input[type=checkbox]:checked+label:before {
-   color: #fae783;
+   color: #f5de6c;
 }
 
 #play-button {
@@ -101,7 +101,7 @@ input[type=checkbox]:checked+label:before {
    display: inline-block;
    margin: 30px auto;
    padding: 3px 42px;
-   background-color: #fae783;
+   background-color: #f5de6c;
    border: 6px solid #814239;
    border-radius: 42%;
    color: #41221d;
@@ -298,8 +298,6 @@ input[type=checkbox]:checked+label:before {
    display: inline-block;
 }
 
-.user-wrapper p {}
-
 .user-input {
    font-weight: bold;
 }
@@ -326,4 +324,8 @@ input[type=checkbox]:checked+label:before {
 
 #sign-out-btn:focus {
    background-color: #e87d30;
+}
+
+.test {
+   color: #5295d3;
 }

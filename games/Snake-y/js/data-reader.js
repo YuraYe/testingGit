@@ -1,4 +1,4 @@
-const VERSION = "v 0.4.3 beta"
+const VERSION = "v 0.4.5 beta"
 // Получаем HTML элементы в переменыые (jQuery)
 let speedText = $('#speed-text');
 let speedSlider = $('#speed-range');
@@ -24,14 +24,14 @@ function ReadData() {
 }
 
 
-function SpeedSave(speedValue) {
+function SpeedSave(speedValue) {  // "-1"
    USER.lastSpeed = speedValue;
    localStorage.setItem('currentUser', JSON.stringify(USER));
 
    // Получаем из памяти данные пользователей и парсим их
    let usersData = JSON.parse(localStorage.getItem('usersData'));
    usersData[USER.id].lastSpeed = speedValue;
-   SaveUserData(usersData);
+   SaveUserData(usersData[USER.id]);
 }
 
 
@@ -83,12 +83,11 @@ function TryToLoad(dataKey = 'currentUser') {
 
 function SaveUserData(thisUser) {
    try {
-      console.log(thisUser);
       // Перезаписываем нашего пользователя
       let allUsers = JSON.parse(localStorage.getItem('usersData'));
       allUsers[thisUser.id] = thisUser;
 
-      localStorage.setItem('usersData', JSON.stringify(allUsers));
+      localStorage.setItem('usersData', JSON.stringify(allUsers));   
       localStorage.setItem('currentUser', JSON.stringify(thisUser));
 
       console.log('Your data was saved!');

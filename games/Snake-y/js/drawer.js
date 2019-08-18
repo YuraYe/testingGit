@@ -1,3 +1,20 @@
+// Цвета для змейки
+const Colors = [{
+      head: "#8a270c",
+      prim: "#e04427",
+      secd: "#e9b168",
+      step: 3
+   },
+   {
+      head: "#8a270c",
+      prim: "#e04427",
+      secd: "#e9b168",
+      step: 3
+   }
+];
+// current color
+let color = 0;
+
 function drawField(sizeStep = 13) {
    let counter = 0;
 
@@ -22,12 +39,13 @@ function drawField(sizeStep = 13) {
       }
    }
 
+   let p = 2;
    // Рисуем границы игрового поля
    xxx.fillStyle = '#604e22';
-   xxx.fillRect(0, 0, tileSize, Width);
-   xxx.fillRect(0, 0, Height, tileSize);
-   xxx.fillRect(0, Width - tileSize, Width, Height);
-   xxx.fillRect(Height - tileSize, 0, Width, Height);
+   xxx.fillRect(0, 0, tileSize - p, Width);
+   xxx.fillRect(0, 0, Height, tileSize - p);
+   xxx.fillRect(0, Width - tileSize + p, Width, Height);
+   xxx.fillRect(Height - tileSize + p, 0, Width, Height);
 
 }
 
@@ -49,11 +67,11 @@ function drawSnake(snake, food) {
    // Змейка
    for (let i = 0; i < snake.length; i++) {
       if (i === 0) // Голова
-         xxx.fillStyle = "#E04B25";
-      else if (i % 3) // Кратно числу
-         xxx.fillStyle = "#F28068";
+         xxx.fillStyle = Colors[color].head;
+      else if (i % Colors[color].step) // Кратно числу
+         xxx.fillStyle = Colors[color].prim;
       else // Остальные
-         xxx.fillStyle = "#F69C80";
+         xxx.fillStyle = Colors[color].secd;
 
       xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize); // Выводим змейку на экран
    }
@@ -126,8 +144,8 @@ function eatTail(headX, headY, array) {
 function genFood(image, imageAddSize, cost = 1) {
    return {
       // Координаты, в которых спаунится еда
-      x: (Math.floor(Math.random() * (Cols - 1)) + 1) * tileSize,
-      y: (Math.floor(Math.random() * (Rows - 1)) + 1) * tileSize,
+      x: (Math.floor(Math.random() * (Cols - 2)) + 1) * tileSize,
+      y: (Math.floor(Math.random() * (Rows - 2)) + 1) * tileSize,
       // Цена сбора еды
       cost: cost,
       // Картинка для еды

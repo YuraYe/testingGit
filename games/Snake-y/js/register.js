@@ -1,16 +1,15 @@
 let RegUSER;
 
 try {
-   if (localStorage.getItem('usersData') !== '{users:[]}' &&
-      localStorage.getItem('usersData') !== null)
-      RegUSER = JSON.parse(localStorage.getItem('usersData'));
-   else
-      throw new Error('Error loading users');
+   RegUSER = JSON.parse(localStorage.getItem('usersData'));
 
+   if(RegUSER == null)
+      throw new Error('Is null!');
 } catch (e) {
    localStorage.setItem('usersData', '{users:[]}');
+   RegUSER = localStorage['usersData'];
    localStorage.setItem('currentUser', '{}');
-   console.warn('User was unsaved and recreated!');
+   console.warn('User was unsaved and recreated!\n' + e);
 }
 
 
@@ -29,23 +28,23 @@ function CheckUser() {
    }
 }
 
-
 let autorizer = false;
 
-$('#play-button').on('click', function() {
+$('#play-button').on('click', function () {
    StartPlay();
 });
 
+let newUser = {};
+
 function StartPlay() {
    let username = $('#username-input').val();
-   let data = localStorage.getItem('usersData');
 
-   if (data !== '{users:[]}') {
+   if (RegUSER != '{users:[]}') {
       if (username !== '') {
          if ($('#isNewPlayer').is(':checked')) {
 
             let isNew = true;
-            RegUSER.forEach(function(item) {
+            RegUSER.forEach(function (item) {
                if (item.username === username) {
                   isNew = false;
                }
@@ -57,15 +56,19 @@ function StartPlay() {
                   "id": RegUSER.length,
                   "bestScore": 0,
                   "playedGames": 0,
-                  "lastSpeed": 0
+                  "lastSpeed": "0"
                };
 
                RegUSER.push(newUser);
+
+               console.log(newUser);
+               console.log(RegUSER);
+
                localStorage.setItem('usersData', JSON.stringify(RegUSER));
                localStorage.setItem('currentUser', JSON.stringify(newUser));
 
                autorizer = true;
-               console.log('Created!' + localStorage['usersData']);
+               console.log('Created!\n' + localStorage['usersData']);
             }
 
             if (!autorizer)
@@ -74,10 +77,10 @@ function StartPlay() {
          } else {
 
             let isNew = true;
-            RegUSER.forEach(function(item, index) {
+            RegUSER.forEach(function (item, index) {
                if (item.username == username) {
                   localStorage.setItem('currentUser', JSON.stringify(item));
-                  consoe.log(item);
+                  console.log(item);
                   autorizer = true;
                }
             });
@@ -86,14 +89,14 @@ function StartPlay() {
          }
 
          if (autorizer)
-            SignIn();
+            SignIn(newUser);
 
       } else {
          alert('Enter username!');
       }
 
    } else {
-      let newUser = {
+      newUser = {
          "username": username,
          "id": 0,
          "bestScore": 0,
@@ -109,7 +112,7 @@ function StartPlay() {
 }
 
 
-$('#sign-out-btn').on('click', function() {
+$('#sign-out-btn').on('click', function () {
    localStorage.setItem('currentUser', '{}');
    $('.hello').removeClass('hidden');
    $('#allgame-wrapper').addClass('hidden');
@@ -122,7 +125,7 @@ function SignIn(newUser) {
       // Парсим данные из памяти
       users = JSON.parse(localStorage.getItem('usersData'));
       // Пытаемся в полученый массив добавить нового пользователя
-      users.users.push(newUser);
+      users.push(newUser);
    } catch (e) {
       // При ошибке перезаписываем объект
       users = [newUser];

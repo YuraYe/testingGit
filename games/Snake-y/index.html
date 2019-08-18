@@ -10,6 +10,7 @@
 
    <link rel="stylesheet" href="../../../includes/fontawesome/min.css">
    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="shop.css">
 </head>
 
 <body>
@@ -25,6 +26,12 @@
          </label>
       </div>
       <a id="play-button" href="#">PLAY</a>
+   </div>
+
+   <div id="shop__color-snake" class="shop__snake hello">
+      <div class="shop-inner">
+         <div id="snake-color-1" class="color-circle"></div>
+      </div>
    </div>
 
    <div id="allgame-wrapper" class="allgame-wrapper hidden">
@@ -45,7 +52,8 @@
 
          <div class="settigs-wrapper">
             <div class="speed-wrapper">
-               <input id="speed-range" class="speed-range" type="range" name="speed-range" value="" min="-7" max="7" oninput="SpeedSet()">
+               <input id="speed-range" class="speed-range" type="range" name="speed-range" value="" min="-7" max="7"
+                  oninput="SpeedSet()">
                <div class="divisions">
                   <span class="span-1"></span>
                   <span class="span-2"></span>
@@ -65,6 +73,7 @@
                </div>
                <p id="speed-text">100%</p>
             </div>
+            <button id="btn-shop__snake-color" class="shop-btn">Snake</button>
          </div>
 
          <div class="user-wrapper" id="user-infopanel">
@@ -86,6 +95,7 @@
    <script src="js/game.js"></script>
    <script src="js/register.js"></script>
    <script src="js/listener.js"></script>
+   <script src="js/shop.js"></script>
 
 </body>
 

@@ -1,0 +1,28 @@
+.shop-inner {
+    width: 80%;
+    min-height: 500px;
+    margin: 30px auto;
+    background-color: #8a8346;
+    border: 5px solid #e9b168;
+    border-radius: 25px;
+    display: grid;
+    grid-auto-flow: column;
+ }
+
+.color-circle {
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+    border-radius: 50%;
+    transition: 0.3s ease all;
+}
+
+.color-circle:hover {
+    border-radius: 10%;
+    transition: 0.3s ease all;
+}
+
+
+#snake-color-1 {
+    background: #4370ec;
+}

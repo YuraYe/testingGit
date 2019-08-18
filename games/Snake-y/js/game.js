@@ -77,7 +77,7 @@ function MainGame() {
 
 // Рисуем, непосредственно, всё :)
 function draw() {
-   drawField(13);
+   drawField(15);
    if (PLAY === true) {
       // Еда
       xxx.drawImage(food.img, food.x - food.add, food.y - food.add, tileSize + food.add * 2, tileSize + food.add * 2);
