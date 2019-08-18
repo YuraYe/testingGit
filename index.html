@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>INDEX</title>
 
-    <link rel="stylesheet" href="main.css">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>INDEX</title>
+
+   <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    <div class="container">
-        <a href="games/Plates/index.html">Plates game</a>
-        <a href="games/Snake/index.html">Classic Snake game</a>
-        <a href="pages/landing/example.html">Example page</a>
-    </div>
+   <div class="container">
+      <a href="games/Plates/index.html">Plates game</a>
+      <button type="button" name="snakes-btn" class="snakes-btn">Classic Snake game</button>
+      <div class="inner-btns snakes-inner">
+         <a href="games/Snake-y/index.html">Yura's version</a>
+         <a href="games/Snake-p/index.html">Pasha's version</a>
+      </div>
+      <a href="pages/landing/example.html">Example page</a>
+   </div>
+
+   <script src="includes/jquery-3.4.0.min.js"></script>
+   <script type="text/javascript">
+      $('.snakes-btn').on('click', function() {
+         $('.snakes-inner').toggleClass('clicked');
+      });
+   </script>
 </body>
+
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+   <title>Classic SNAKE game</title>
+
+   <link rel="stylesheet" href="../../../includes/fontawesome/min.css">
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <div class="hello hidden">
+      <h1>Classic <b>Snake</b> game</h1>
+      <h2>by Joura</h2>
+      <p class="version">beta</p>
+      <input type="text" name="login" placeholder="enter your login" value="" id="username-input">
+      <div class="newUser-wrapper">
+         <input type="checkbox" name="isNewPlayer" id="isNewPlayer" class="checkbox">
+         <label for="isNewPlayer">
+            <p>create new user</p>
+         </label>
+      </div>
+      <a id="play-button" href="#">PLAY</a>
+   </div>
+
+   <div id="allgame-wrapper" class="allgame-wrapper hidden">
+      <div class="game-container">
+         <div class="game-infopanel">
+            <div id="pause-panel" class="pause-panel">
+               <h2 id="canvas-alert">Press ME or SPACE to play</h2>
+            </div>
+         </div>
+
+         <div class="game-infopanel">
+            <p id="score-field">0</p>
+         </div>
+
+         <div class="game-wrapper">
+            <canvas id="game-canvas" width="608" height="608"></canvas>
+         </div>
+
+         <div class="settigs-wrapper">
+            <div class="speed-wrapper">
+               <input id="speed-range" class="speed-range" type="range" name="speed-range" value="" min="-7" max="7" oninput="SpeedSet()">
+               <div class="divisions">
+                  <span class="span-1"></span>
+                  <span class="span-2"></span>
+                  <span class="span-3"></span>
+                  <span class="span-4"></span>
+                  <span class="span-5"></span>
+                  <span class="span-6"></span>
+                  <span class="span-7"></span>
+                  <span class="span-8"></span>
+                  <span class="span-9"></span>
+                  <span class="span-10"></span>
+                  <span class="span-11"></span>
+                  <span class="span-12"></span>
+                  <span class="span-13"></span>
+                  <span class="span-14"></span>
+                  <span class="span-15"></span>
+               </div>
+               <p id="speed-text">100%</p>
+            </div>
+         </div>
+
+         <div class="user-wrapper" id="user-infopanel">
+            <h3 id="username-field">???</h3>
+            <br>
+            <p>Best score: </p><span class="user-input" id="best-score-field">0</span>
+            <br>
+            <p>Played games: </p><span class="user-input" id="playedGames-field">0</span>
+
+            <button type="button" name="sign-out-btn" id="sign-out-btn">sign out</button>
+         </div>
+      </div>
+      <p class="version in-game-version">beta</p>
+   </div>
+
+   <script src="../../../includes/jquery-3.4.0.min.js"></script>
+   <script src="js/data-reader.js"></script>
+   <script src="js/drawer.js"></script>
+   <script src="js/game.js"></script>
+   <script src="js/register.js"></script>
+   <script src="js/listener.js"></script>
+
+</body>
+
+</html>
