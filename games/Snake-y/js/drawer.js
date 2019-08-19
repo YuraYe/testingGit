@@ -1,19 +1,44 @@
 // Цвета для змейки
-const Colors = [{
-      head: "#8a270c",
-      prim: "#e04427",
-      secd: "#e9b168",
+const Colors = new Map([
+   ['dark-red', {
+      head: '#8a270c',
+      prim: '#e04427',
+      secd: '#e9b168',
+      type: 'squere',
       step: 3
-   },
-   {
-      head: "#8a270c",
-      prim: "#e04427",
-      secd: "#e9b168",
+   }],
+   ['light-blue', {
+      head: '#17587d',
+      prim: '#2e8dc3',
+      secd: '#5da5cd',
+      type: 'circle',
       step: 3
-   }
-];
+   }],
+   ['toxic', {
+      head: '#523162',
+      prim: '#9259d4',
+      secd: '#1dc128',
+      type: 'square',
+      step: 3
+   }],
+   ['pig-head', {
+      head: 'pig.png',
+      prim: '#d088ed',
+      secd: '#d088ed',
+      type: 'img-sq',
+      headAdd: 8,
+      step: 0
+   }],
+   ['deer', {
+      head: 'deer.png',
+      body: 'mine-cart.png',
+      type: 'images',
+      headAdd: 6,
+      bodyAdd: 0
+   }],
+]);
 // current color
-let color = 0;
+let color = Colors.get('dark-red');
 
 function drawField(sizeStep = 13) {
    let counter = 0;
@@ -56,32 +81,74 @@ function drawSnake(snake, food) {
    let snakeY = snake[0].y;
 
    // Проверка на задевание своего хвоста
-   let lose = eatTail(snakeX, snakeY, snake);
+   PLAY = eatTail(snakeX, snakeY, snake);
    // Проверка на задевание стены
    if (snakeX < 1 || snakeX > tileSize * (Cols - 2) ||
       snakeY < 1 || snakeY > tileSize * (Rows - 2)) {
       Lose('evil wall');
-      lose = true;
+      PLAY = false;
    }
 
-   // Змейка
-   for (let i = 0; i < snake.length; i++) {
-      if (i === 0) // Голова
-         xxx.fillStyle = Colors[color].head;
-      else if (i % Colors[color].step) // Кратно числу
-         xxx.fillStyle = Colors[color].prim;
-      else // Остальные
-         xxx.fillStyle = Colors[color].secd;
-
-      xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize); // Выводим змейку на экран
-   }
-
-   if (lose)
-      return false;
-   else
+   if (PLAY === true)
       MoveSnake(snake, food);
+}
 
-   return true;
+function SnakeFill(i) {
+   switch (color.type) {
+      case 'square':
+         if (i === 0) // Голова
+            xxx.fillStyle = color.head;
+         else if (i % color.step) // Кратно числу
+            xxx.fillStyle = color.prim;
+         else // Остальные
+            xxx.fillStyle = color.secd;
+
+         // Выводим змейку на экран
+         xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+         break;
+
+      case 'circle':
+         if (i === 0) // Голова
+            xxx.fillStyle = color.head;
+         else if (i % color.step) // Кратно числу
+            xxx.fillStyle = color.prim;
+         else // Остальные
+            xxx.fillStyle = color.secd;
+
+         let half = tileSize / 2;
+         xxx.arc(snake[i].x + half, snake[i].y + half, half, 0, Math.PI * 2);
+         // Выводим змейку на экран
+         xxx.fill();
+         break;
+
+      case 'img-sq':
+         if (i === 0) { // Голова
+            let img = new Image(tileSize, tileSize);
+            img.src = 'img/snake/' + color.head;
+            drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+         } else if (i % color.step) { // Кратно числу
+            xxx.fillStyle = color.prim;
+            // Выводим змейку на экран
+            xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+         } else { // Остальные
+            xxx.fillStyle = color.secd;
+            // Выводим змейку на экран
+            xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+         }
+         break;
+
+      case 'images':
+         if (i === 0) { // Голова
+            let img = new Image(tileSize, tileSize);
+            img.src = 'img/snake/' + color.head;
+            drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+         } else {
+            let img = new Image(tileSize, tileSize);
+            img.src = 'img/snake/' + color.body;
+            drawRotateImage(img, snake[i].x, snake[i].y, color.bodyAdd, deg);
+         }
+         break;
+   }
 }
 
 function MoveSnake(snake, food) {
@@ -106,15 +173,19 @@ function MoveSnake(snake, food) {
    switch (dir) {
       case 'l':
          snakeX -= tileSize;
+         deg = 90;
          break;
       case 'u':
          snakeY -= tileSize;
+         deg = 180;
          break;
       case 'r':
          snakeX += tileSize;
+         deg = 270;
          break;
       case 'd':
          snakeY += tileSize;
+         deg = 0;
          break;
    }
 
@@ -130,13 +201,13 @@ function MoveSnake(snake, food) {
 
 // Та самая проверка на съедание хвоста
 function eatTail(headX, headY, array) {
-   for (let i = 1; i < array.length; i++) {
+   for (let i = 2; i < array.length; i++) {
       if (headX == array[i].x && headY == array[i].y) {
          Lose('suicide');
-         return true;
+         return false;
       }
    }
-   return false;
+   return true;
 }
 
 
@@ -144,8 +215,8 @@ function eatTail(headX, headY, array) {
 function genFood(image, imageAddSize, cost = 1) {
    return {
       // Координаты, в которых спаунится еда
-      x: (Math.floor(Math.random() * (Cols - 2)) + 1) * tileSize,
-      y: (Math.floor(Math.random() * (Rows - 2)) + 1) * tileSize,
+      x: (Math.floor(Math.random() * (Cols + 2)) - 2) * tileSize,
+      y: (Math.floor(Math.random() * (Rows + 2)) - 2) * tileSize,
       // Цена сбора еды
       cost: cost,
       // Картинка для еды
@@ -153,6 +224,26 @@ function genFood(image, imageAddSize, cost = 1) {
       // На сколько img выступает за границы ячейки
       add: imageAddSize
    };
+}
+
+
+function drawMyImage(img, x, y, add) {
+   xxx.drawImage(img, x - add, y - add, tileSize + add * 2, tileSize + add * 2);
+}
+
+function drawRotateImage(img, x, y, add, deg) {
+   // #СПИЖЕНА + мои доработки
+   //Convert degrees to radian
+   var rad = deg * Math.PI / 180;
+   //Set the origin to the center of the image
+   xxx.translate(x + tileSize / 2, y + tileSize / 2);
+   //Rotate the canvas around the origin
+   xxx.rotate(rad);
+   //draw the image
+   xxx.drawImage(img, (tileSize / 2 * (-1)) - add, (tileSize / 2 * (-1)) - add, tileSize + add * 2, tileSize + add * 2);
+   //reset the canvas
+   xxx.rotate(rad * (-1));
+   xxx.translate((x + tileSize / 2) * (-1), (y + tileSize / 2) * (-1));
 }
 
 // Генератор еды в рандомных координатах

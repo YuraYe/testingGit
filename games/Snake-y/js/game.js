@@ -9,6 +9,7 @@ const Cols = 32;
 const Rows = 32;
 let tileSize = 1; // one tile size
 let speed = 100;
+let deg = 270; // градус поворота
 
 // Поиск меньшей стороны
 // По ней будем считать размер клетки
@@ -39,7 +40,7 @@ function FillFoodImages() {
    // Заполняем массив картинками
    for (let i = 1; i <= 2; i++) {
       let img = new Image(tileSize, tileSize);
-      img.src = `img/0${i}.png`;
+      img.src = `img/food/0${i}.png`;
       array.push(img);
    }
    return array;
@@ -55,18 +56,17 @@ let IsLose = false;
 
 let GAME; // для интервала между перерисовками
 
-/*************************************************/
+/************************************************/
 // ТОЧКА ВХОДА В ИГРУ
 function MainGame() {
 
    ReadData();
 
-   food = genFood(foodImages[0], 4);
-
-
    $('.game-infopanel').on('click', function() {
       playGame();
    });
+
+   food = genFood(foodImages[0], 4);
 
    // Like Update function in Unity
    // Перерисовка canvas
@@ -78,11 +78,15 @@ function MainGame() {
 // Рисуем, непосредственно, всё :)
 function draw() {
    drawField(15);
-   if (PLAY === true) {
+   if (PLAY === true && IsLose === false) {
       // Еда
-      xxx.drawImage(food.img, food.x - food.add, food.y - food.add, tileSize + food.add * 2, tileSize + food.add * 2);
+      drawMyImage(food.img, food.x, food.y, food.add);
       // Змейка
       drawSnake(snake, food);
+   }
+   // Змейка
+   for (let i = 0; i < snake.length; i++) {
+      SnakeFill(i);
    }
 }
 

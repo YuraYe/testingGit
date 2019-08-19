@@ -1,12 +1,11 @@
-const VERSION = "v 0.4.5 beta"
+const VERSION = "v 0.5.1 beta"
 // Получаем HTML элементы в переменыые (jQuery)
 let speedText = $('#speed-text');
 let speedSlider = $('#speed-range');
 
 $('.version').text(VERSION);
 
-/*************************************************/
-
+//////////////////////////////////////////////////
 
 let USER = TryToLoad('currentUser');
 
@@ -36,7 +35,8 @@ function SpeedSave(speedValue) {  // "-1"
 
 
 function Lose(killer = 'anonim') {
-   clearInterval(GAME); // Остановка игры
+   //clearInterval(GAME); // Остановка игры
+
    setInterval(function() { // Вывод сообщения
       $('#canvas-alert').html("You lose...</br></br>😿");
       $('.pause-panel').removeClass('hidden');
@@ -53,7 +53,7 @@ function Lose(killer = 'anonim') {
          // Присвоение рекорда
          USER.bestScore = score;
          // Вывод сообщения про новый рекорд
-         alert(`Your new best score is ${score}!\n Congratulations!!! 🎉🎉🎉🎉🎉🎉🎉`)
+         alert(`Your new best score is ${score}!\n Congratulations!!!  🎉🎉🎉🎉🎉🎉🎉`)
       }
       // Сохраняем в память
       SaveUserData(USER);
@@ -87,7 +87,7 @@ function SaveUserData(thisUser) {
       let allUsers = JSON.parse(localStorage.getItem('usersData'));
       allUsers[thisUser.id] = thisUser;
 
-      localStorage.setItem('usersData', JSON.stringify(allUsers));   
+      localStorage.setItem('usersData', JSON.stringify(allUsers));
       localStorage.setItem('currentUser', JSON.stringify(thisUser));
 
       console.log('Your data was saved!');

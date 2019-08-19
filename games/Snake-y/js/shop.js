@@ -4,6 +4,6 @@ $('#btn-shop__snake-color').on('click', function () {
 
 
 $('.color-circle').on('click', function () {
-    color.head = "#fff";
+    color = Colors.get('deer');
     $('#shop__color-snake').addClass('hidden');
 });
