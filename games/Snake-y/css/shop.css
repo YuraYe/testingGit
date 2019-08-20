@@ -2,27 +2,91 @@
     width: 80%;
     min-height: 500px;
     margin: 30px auto;
-    background-color: #8a8346;
-    border: 5px solid #e9b168;
+    background-color: #8a887b;
+    border: 5px solid #707070;
     border-radius: 25px;
-    display: grid;
-    grid-auto-flow: column;
- }
-
-.color-circle {
-    width: 30px;
-    height: 30px;
-    margin: 15px;
-    border-radius: 50%;
-    transition: 0.3s ease all;
+    display: flex;
 }
 
-.color-circle:hover {
-    border-radius: 10%;
+.side-panel {
+    width: 10%;
+}
+.shop-shop {
+    width: 90%;
+}
+
+#shop-colors__canvas {
+    display: block;
+    margin: 20px 0 0 50%;
+}
+
+
+.shop-colors {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    margin: 30px auto;
+    width: 80%;
+}
+.color-set {
+    width: 2em;
+    height: 2em;
+    background-color: #8a887b;
+    border: 7px solid #707070;
+    border-radius: 25%;
+    transition: 1s ease all;
+}
+.color-set:hover {
+    width: 2.8em;
+    height: 2.8em;
     transition: 0.3s ease all;
+}
+.color-square {
+    border-radius: 20%;
+}
+.color-circle {
+    border-radius: 48%;
+}
+.color-img>span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/snake/pig.png);
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 100% 100%;
 }
 
 
 #snake-color-1 {
-    background: #4370ec;
+    background: #e04427;
+    border-color: #e9b168;
+}
+
+#snake-color-2 {
+    background: #2e8dc3;
+    border-color: #5da5cd;
+}
+
+#snake-color-3 {
+    background: #9259d4;
+    border-color: #1dc128;
+}
+
+#snake-color-4 {
+    background: #d088ed;
+    border-color: #d088ed;
+}
+#snake-color-4>span {
+    background-image: url(../img/snake/pig.png);
+}
+
+#snake-color-5 {
+    background: #c5c3c2;
+    border-color: #b6b8bd;
+}
+#snake-color-5>span {
+    background-image: url(../img/snake/deer.png);    
 }

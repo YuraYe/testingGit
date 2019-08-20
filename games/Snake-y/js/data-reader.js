@@ -1,4 +1,4 @@
-const VERSION = "v 0.5.1 beta"
+const VERSION = "v 0.6.3 beta"
 // Получаем HTML элементы в переменыые (jQuery)
 let speedText = $('#speed-text');
 let speedSlider = $('#speed-range');
@@ -18,6 +18,7 @@ function ReadData() {
    $('#playedGames-field').text(USER.playedGames);
    speedText.text(SpeedConvert(USER.lastSpeed));
    speedSlider.val(+USER.lastSpeed);
+   color = Colors.get(USER.lastSnake);
 
    console.log(USER.username + ' sign in!');
 }
@@ -30,6 +31,16 @@ function SpeedSave(speedValue) {  // "-1"
    // Получаем из памяти данные пользователей и парсим их
    let usersData = JSON.parse(localStorage.getItem('usersData'));
    usersData[USER.id].lastSpeed = speedValue;
+   SaveUserData(usersData[USER.id]);
+}
+
+function ColorSave(colorValue) {
+   USER.lastSnake = colorValue;
+   localStorage.setItem('currentUser', JSON.stringify(USER));
+
+   // Получаем из памяти данные пользователей и парсим их
+   let usersData = JSON.parse(localStorage.getItem('usersData'));
+   usersData[USER.id].lastSnake = colorValue;
    SaveUserData(usersData[USER.id]);
 }
 

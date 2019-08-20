@@ -3,7 +3,7 @@ let RegUSER;
 try {
    RegUSER = JSON.parse(localStorage.getItem('usersData'));
 
-   if(RegUSER == null)
+   if (RegUSER == null)
       throw new Error('Is null!');
 } catch (e) {
    localStorage.setItem('usersData', '{users:[]}');
@@ -56,7 +56,9 @@ function StartPlay() {
                   "id": RegUSER.length,
                   "bestScore": 0,
                   "playedGames": 0,
-                  "lastSpeed": "0"
+                  "lastSpeed": "0",
+                  "lastSnake": "dark-red",
+                  "maney": 0,
                };
 
                RegUSER.push(newUser);
@@ -101,7 +103,9 @@ function StartPlay() {
          "id": 0,
          "bestScore": 0,
          "playedGames": 0,
-         "lastSpeed": "0"
+         "lastSpeed": "0",
+         "lastSnake": "dark-red",
+         "maney": 0,
       };
 
 

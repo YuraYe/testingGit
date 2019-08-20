@@ -16,7 +16,7 @@
 <body>
    <div class="hello hidden">
       <h1>Classic <b>Snake</b> game</h1>
-      <h2>by Joura</h2>
+      <!-- <h2>by Joura</h2> -->
       <p class="version">beta</p>
       <input type="text" name="login" placeholder="enter your login" value="" id="username-input">
       <div class="newUser-wrapper">
@@ -28,10 +28,22 @@
       <a id="play-button" href="#">PLAY</a>
    </div>
 
-   <div id="shop__color-snake" class="shop__snake hello">
+   <div id="shop__color-snake" class="shop__snake hello hidden">
       <div class="shop-inner">
-         <div id="snake-color-1" class="color-circle"></div>
+         <aside class="side-panel">
+            <canvas id="shop-colors__canvas" width="16" height="200"></canvas>
+         </aside>
+         <main class="shop-shop">
+            <div class="shop-colors">
+               <div id="snake-color-1" class="color-set color-square"></div>
+               <div id="snake-color-2" class="color-set color-circle"></div>
+               <div id="snake-color-3" class="color-set color-square"></div>
+               <div id="snake-color-4" class="color-set color-square color-img"><span></span></div>
+               <div id="snake-color-5" class="color-set color-img"><span></span></div>
+            </div>
+         </main>
       </div>
+      <button id="btn-shop__close" class="shop-btn">Close</button>
    </div>
 
    <div id="allgame-wrapper" class="allgame-wrapper hidden">
@@ -52,7 +64,8 @@
 
          <div class="settigs-wrapper">
             <div class="speed-wrapper">
-               <input id="speed-range" class="speed-range" type="range" name="speed-range" value="" min="-7" max="7" oninput="SpeedSet()">
+               <input id="speed-range" class="speed-range" type="range" name="speed-range" value="" min="-7" max="7"
+                  oninput="SpeedSet()">
                <div class="divisions">
                   <span class="span-1"></span><span class="span-2"></span><span class="span-3"></span>
                   <span class="span-4"></span><span class="span-5"></span><span class="span-6"></span>
@@ -79,6 +92,7 @@
    </div>
 
    <script src="../../../includes/jquery-3.4.0.min.js"></script>
+   <script src="js/stuff.js"></script>
    <script src="js/data-reader.js"></script>
    <script src="js/drawer.js"></script>
    <script src="js/game.js"></script>

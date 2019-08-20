@@ -1,45 +1,3 @@
-// Цвета для змейки
-const Colors = new Map([
-   ['dark-red', {
-      head: '#8a270c',
-      prim: '#e04427',
-      secd: '#e9b168',
-      type: 'squere',
-      step: 3
-   }],
-   ['light-blue', {
-      head: '#17587d',
-      prim: '#2e8dc3',
-      secd: '#5da5cd',
-      type: 'circle',
-      step: 3
-   }],
-   ['toxic', {
-      head: '#523162',
-      prim: '#9259d4',
-      secd: '#1dc128',
-      type: 'square',
-      step: 3
-   }],
-   ['pig-head', {
-      head: 'pig.png',
-      prim: '#d088ed',
-      secd: '#d088ed',
-      type: 'img-sq',
-      headAdd: 8,
-      step: 0
-   }],
-   ['deer', {
-      head: 'deer.png',
-      body: 'mine-cart.png',
-      type: 'images',
-      headAdd: 6,
-      bodyAdd: 0
-   }],
-]);
-// current color
-let color = Colors.get('dark-red');
-
 function drawField(sizeStep = 13) {
    let counter = 0;
 
@@ -93,47 +51,51 @@ function drawSnake(snake, food) {
       MoveSnake(snake, food);
 }
 
-function SnakeFill(i) {
+function SnakeFill(ctx, snake, tileSize, i, isRotate) {
    switch (color.type) {
       case 'square':
          if (i === 0) // Голова
-            xxx.fillStyle = color.head;
+            ctx.fillStyle = color.head;
          else if (i % color.step) // Кратно числу
-            xxx.fillStyle = color.prim;
+            ctx.fillStyle = color.prim;
          else // Остальные
-            xxx.fillStyle = color.secd;
+            ctx.fillStyle = color.secd;
 
          // Выводим змейку на экран
-         xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+         ctx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
          break;
 
       case 'circle':
          if (i === 0) // Голова
-            xxx.fillStyle = color.head;
+            ctx.fillStyle = color.head;
          else if (i % color.step) // Кратно числу
-            xxx.fillStyle = color.prim;
+            ctx.fillStyle = color.prim;
          else // Остальные
-            xxx.fillStyle = color.secd;
+            ctx.fillStyle = color.secd;
 
          let half = tileSize / 2;
-         xxx.arc(snake[i].x + half, snake[i].y + half, half, 0, Math.PI * 2);
+         ctx.arc(snake[i].x + half, snake[i].y + half, half, 0, Math.PI * 2);
          // Выводим змейку на экран
-         xxx.fill();
+         ctx.stroke();
          break;
 
       case 'img-sq':
          if (i === 0) { // Голова
             let img = new Image(tileSize, tileSize);
             img.src = 'img/snake/' + color.head;
-            drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+            if (isRotate)
+               drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+               else
+               drawMyImage(ctx, tileSize, img, 0, i * tileSize, 1);
+
          } else if (i % color.step) { // Кратно числу
-            xxx.fillStyle = color.prim;
+            ctx.fillStyle = color.prim;
             // Выводим змейку на экран
-            xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+            ctx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
          } else { // Остальные
-            xxx.fillStyle = color.secd;
+            ctx.fillStyle = color.secd;
             // Выводим змейку на экран
-            xxx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
+            ctx.fillRect(snake[i].x, snake[i].y, tileSize, tileSize);
          }
          break;
 
@@ -141,11 +103,21 @@ function SnakeFill(i) {
          if (i === 0) { // Голова
             let img = new Image(tileSize, tileSize);
             img.src = 'img/snake/' + color.head;
-            drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+
+            if (isRotate)
+               drawRotateImage(img, snake[i].x, snake[i].y, color.headAdd, deg);
+            else
+               drawMyImage(ctx, tileSize, img, 0, i * tileSize, 1);
+
          } else {
             let img = new Image(tileSize, tileSize);
             img.src = 'img/snake/' + color.body;
-            drawRotateImage(img, snake[i].x, snake[i].y, color.bodyAdd, deg);
+
+            if (isRotate)
+               drawRotateImage(img, snake[i].x, snake[i].y, color.bodyAdd, deg);
+            else
+               drawMyImage(ctx, tileSize, img, 0, i * tileSize, 1);
+
          }
          break;
    }
@@ -215,8 +187,8 @@ function eatTail(headX, headY, array) {
 function genFood(image, imageAddSize, cost = 1) {
    return {
       // Координаты, в которых спаунится еда
-      x: (Math.floor(Math.random() * (Cols + 2)) - 2) * tileSize,
-      y: (Math.floor(Math.random() * (Rows + 2)) - 2) * tileSize,
+      x: (Math.floor(Math.random() * (Cols - 8)) + 4) * tileSize,
+      y: (Math.floor(Math.random() * (Rows - 8)) + 4) * tileSize,
       // Цена сбора еды
       cost: cost,
       // Картинка для еды
@@ -227,7 +199,7 @@ function genFood(image, imageAddSize, cost = 1) {
 }
 
 
-function drawMyImage(img, x, y, add) {
+function drawMyImage(xxx, tileSize, img, x, y, add) {
    xxx.drawImage(img, x - add, y - add, tileSize + add * 2, tileSize + add * 2);
 }
 

@@ -19,13 +19,33 @@ if (Width / Cols < Height / Rows)
 else
    tileSize = Height / Rows;
 
+
+// Случайные координаты для головы
+let randRow = Math.floor(Math.random() * (Rows - 10)) + 5;
+let randCol = Math.floor(Math.random() * (Cols - 10)) + 5;
+
 let snake = []; // Объявляем массив змейки
 for (let i = 0; i < 3; i++) { // Цоклом заполняем её
-   snake[i] = {
-      x: (5 - i) * tileSize, // - i  --> для отступа
-      y: (6) * tileSize // индекс ячейки * размер ячейки
+   if (randRow < Rows / 2) {
+      snake[i] = {
+         x: (randRow - i) * tileSize, // - i  --> для отступа
+         y: (randCol) * tileSize // индекс ячейки * размер ячейки
+      }
+   } else {
+      snake[i] = {
+         x: (randRow + i) * tileSize, // - i  --> для отступа
+         y: (randCol) * tileSize // индекс ячейки * размер ячейки
+      }
    }
 }
+if (randRow < Rows / 2) {
+   dir = 'r';
+   deg = 270;
+} else {
+   dir = 'l';
+   deg = 90;
+}
+
 
 // СЧЁТ
 const scoreField = document.getElementById('score-field');
@@ -62,7 +82,7 @@ function MainGame() {
 
    ReadData();
 
-   $('.game-infopanel').on('click', function() {
+   $('.game-infopanel').on('click', function () {
       playGame();
    });
 
@@ -77,16 +97,16 @@ function MainGame() {
 
 // Рисуем, непосредственно, всё :)
 function draw() {
-   drawField(15);
+   drawField(11);
    if (PLAY === true && IsLose === false) {
       // Еда
-      drawMyImage(food.img, food.x, food.y, food.add);
+      drawMyImage(xxx, tileSize, food.img, food.x, food.y, food.add);
       // Змейка
       drawSnake(snake, food);
    }
    // Змейка
    for (let i = 0; i < snake.length; i++) {
-      SnakeFill(i);
+      SnakeFill(xxx, snake, tileSize, i, true);
    }
 }
 
